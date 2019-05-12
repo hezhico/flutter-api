@@ -40,11 +40,15 @@ class _HomePageState extends State<HomePage> {
            print(future.data);
            if(future.hasData) {
              List<Map> list = (future.data['data'] as List).cast();
-
+            final List nav1 = list.getRange(0, 8).toList();
+            final List nav2 = list.getRange(8, list.length).toList();
+             var navList =  List();
+             navList.add(nav1);
+             navList.add(nav2);
              return Column(
                children: <Widget>[
-                 SwiperBanner( SwiperList:list ),
-                 TopNavitator(NavList:list),
+                 SwiperBanner( SwiperList: navList.toList() ),
+                //  TopNavitator(NavList:list),
                ],
              );
             //  return Center(child: Text("正在加载1"),);
@@ -62,33 +66,28 @@ class SwiperBanner extends StatelessWidget {
 
   final List SwiperList;
   SwiperBanner({Key key, this.SwiperList}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
-    //  final width = MediaQuery.of(context).size.width;
+    
     return SingleChildScrollView(
       child: Container(
         height: 200.0,
         child: Swiper(
           itemBuilder: (BuildContext content, int index){
-          
-            // final height = MediaQuery.of(context).size.height;
             return Container(
-              // child: SwiperList[index],
-              // width: width,
-              // child: Text('${SwiperList[index]['title']}'),
               child: Row(
                 children: <Widget>[
-                  Text('${SwiperList[index]['title']}')
-                  // TopNavitator(NavList: SwiperList),
+                  TopNavitator(NavList: SwiperList[index]),
                 ],
               ),
               decoration: new BoxDecoration(
-                border:  Border.all(width: 2.0, color: Colors.lightBlue)
+                // border:  Border.all(width: 2.0, color: Colors.lightBlue)
               )
             );
-          },
-          itemCount: SwiperList.length,
+          },        
+          itemCount: 2,
           pagination: SwiperPagination(),
           // autoplay: true,
         ),

@@ -7,6 +7,8 @@ class TopNavitator extends StatelessWidget {
 
   final List NavList;
 
+  
+
   // TopNavitator(this.NavList);
   TopNavitator({Key key, this.NavList}) : super(key: key);
 
@@ -24,21 +26,24 @@ class TopNavitator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: 300.0,
-        padding: EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-          border:  Border.all(width: 2.0, color: Colors.lightBlue)
-        ),
-        child: GridView.count(
-          crossAxisCount: 4,
-          padding: EdgeInsets.all(3.0),
-          children: NavList.map((item){
-            return _gridViewWidget(context, item);
-          }).toList()
-        )
+    final width = MediaQuery.of(context).size.width;
+    if(this.NavList.length > 8){
+        this.NavList.removeRange(8, this.NavList.length);
+    }
+    return Container(
+      height: 250.0,
+      width: width - 4.0,
+      padding: EdgeInsets.all(3.0),
+      decoration: BoxDecoration(
+        // border:  Border.all(width: 2.0, color: Colors.lightBlue)
       ),
+      child: GridView.count(
+        crossAxisCount: 4,
+        padding: EdgeInsets.all(3.0),
+        children: NavList.map((item){
+          return _gridViewWidget(context, item);
+        }).toList()
+      )
     );
   }
 }
