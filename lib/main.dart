@@ -10,13 +10,15 @@ class MyApp extends StatelessWidget {
   // 重写build方法
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '百姓生活', // 基本没用
-      debugShowCheckedModeBanner: false, // 关闭右上角的debug
-      theme: ThemeData( // ui库 自带的主题， 支持自定义
-        primarySwatch: Colors.blue,
+    return Container( // 所有的组件 嵌套一层 Container 方便以后容易扩展
+      child: MaterialApp(
+        title: '百姓生活', // 基本没用
+        debugShowCheckedModeBanner: false, // 关闭右上角的debug
+        theme: ThemeData( // ui库 自带的主题， 支持自定义
+          primarySwatch: Colors.blue,
+        ),
+        home: IndexPage(),
       ),
-      home: IndexPage(),
     );
   }
 }

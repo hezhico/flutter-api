@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';  // http 请求模块
 import '../config/config.dart'; // 基础路径的配置文件
-import 'dart:io';
+// import 'dart:io';   // contentType 对象
 
 
 Future getHomePage() async {

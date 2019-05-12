@@ -5,7 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'dart:convert';
 
 import '../api/home_com.dart';
-
+import '../components/navgitor.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,16 +16,16 @@ class _HomePageState extends State<HomePage> {
 
   String HomePageCon = "正在获取数据";
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getHomePage().then((result) {
-      setState((){
-        // HomePageCon = result.toString();
-      });
-    });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getHomePage().then((result) {
+  //     setState((){
+  //       // HomePageCon = result.toString();
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,20 +37,19 @@ class _HomePageState extends State<HomePage> {
       body: FutureBuilder(
          future: getHomePage(),
          builder: (context, future) {
-          //  print(future.data);
+           print(future.data);
            if(future.hasData) {
-             print('222${future.data}');
-            //  var data = json.decode(future.data);
-             print(future.data['code']);
              List<Map> list = (future.data['data'] as List).cast();
+
              return Column(
                children: <Widget>[
                  SwiperBanner( SwiperList:list ),
+                 TopNavitator(NavList:list),
                ],
              );
             //  return Center(child: Text("正在加载1"),);
            }else {
-             return Center(child: Text("正在加载"),);
+             return Center(child: Text("正在加载2222"),);
            }
          },
       )
@@ -66,20 +65,33 @@ class SwiperBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200.0,
-      child: Swiper(
-        itemBuilder: (BuildContext content, int index){
-          return Container(
-            // child: SwiperList[index],
-            child: Text('${SwiperList[index]['title']}'),
-            decoration: new BoxDecoration(
-              border:  Border.all(width: 2.0, color: Colors.lightBlue)
-            )
-          );
-        },
-        itemCount: SwiperList.length,
-        autoplay: true,
+    //  final width = MediaQuery.of(context).size.width;
+    return SingleChildScrollView(
+      child: Container(
+        height: 200.0,
+        child: Swiper(
+          itemBuilder: (BuildContext content, int index){
+          
+            // final height = MediaQuery.of(context).size.height;
+            return Container(
+              // child: SwiperList[index],
+              // width: width,
+              // child: Text('${SwiperList[index]['title']}'),
+              child: Row(
+                children: <Widget>[
+                  Text('${SwiperList[index]['title']}')
+                  // TopNavitator(NavList: SwiperList),
+                ],
+              ),
+              decoration: new BoxDecoration(
+                border:  Border.all(width: 2.0, color: Colors.lightBlue)
+              )
+            );
+          },
+          itemCount: SwiperList.length,
+          pagination: SwiperPagination(),
+          // autoplay: true,
+        ),
       ),
     );
   }
