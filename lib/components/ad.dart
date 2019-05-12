@@ -11,7 +11,7 @@ class AdBanner extends StatelessWidget {
       // child: new Image.asset('lib/image/recommend01.jpg'),
       child: InkWell(
         onTap: _lanchURL,
-        child: new Image.asset('lib/image/recommend01.jpg'),
+        child: new Image.asset('lib/image/recommend01.jpg'), // 本地资源的访问
       ),
     );
   }
