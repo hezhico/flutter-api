@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import '../api/home_com.dart';
 import '../components/navgitor.dart';
+import '../components/ad.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
                children: <Widget>[
                  SwiperBanner( SwiperList: navList.toList() ),
                 //  TopNavitator(NavList:list),
+                AdBanner(),
                ],
              );
             //  return Center(child: Text("正在加载1"),);
